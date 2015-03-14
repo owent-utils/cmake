@@ -19,7 +19,7 @@ set(C_FLAGS_IN_ONE_COMMON "")
 set(CXX_FLAGS_IN_ONE_COMMON "")
 
 # 编译器选项 (仅做了GCC、VC和Clang兼容)
-if( "${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+if( ${CMAKE_CXX_COMPILER_ID} STREQUAL "GNU")
         add_definitions(-Wall -Werror -rdynamic -fPIC -D_POSIX_MT_ -D_FILE_OFFSET_BITS=64)
 
 	# gcc 4.9 编译输出颜色支持
@@ -40,7 +40,7 @@ if( "${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
                 message(STATUS "GCC Version ${CMAKE_CXX_COMPILER_VERSION} , using -std=gnu++0x.")
         endif()
 
-elseif( "${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+elseif( ${CMAKE_CXX_COMPILER_ID} STREQUAL "Clang")
         add_definitions(-Wall -Werror -fPIC -D_POSIX_MT_ -D_FILE_OFFSET_BITS=64)
         set(CXX_FLAGS_IN_ONE_COMMON "${C_FLAGS_IN_ONE_COMMON} -std=c++11")
         message(STATUS "CLang Version ${CMAKE_CXX_COMPILER_VERSION} , using -std=c++11.")
