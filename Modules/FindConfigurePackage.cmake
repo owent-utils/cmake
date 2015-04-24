@@ -57,6 +57,19 @@
 # (To distribute this file outside of CMake, substitute the full
 #  License text for the above reference.)
 
+function(FindConfigurePackageDownloadFile from to)
+    find_program (CURL_FULL_PATH curl)
+    if(CURL_FULL_PATH)
+        execute_process(COMMAND ${CURL_FULL_PATH} -v ${from} -o ${to})
+    else()
+        find_program (WGET_FULL_PATH wget)
+        if(WGET_FULL_PATH)
+        execute_process(COMMAND ${WGET_FULL_PATH} -v ${from} -O ${to})
+        else()
+            file(DOWNLOAD ${from} ${to} SHOW_PROGRESS)
+        endif()
+    endif()
+endfunction()
 
 macro (FindConfigurePackage)
     include(CMakeParseArguments)
@@ -93,7 +106,7 @@ macro (FindConfigurePackage)
 
                 if(NOT EXISTS "${FindConfigurePackage_WORKING_DIRECTORY}/${DOWNLOAD_FILENAME}")
                     message(STATUS "start to download ${DOWNLOAD_FILENAME} from ${FindConfigurePackage_ZIP_URL}")
-                    file(DOWNLOAD "${FindConfigurePackage_ZIP_URL}" "${FindConfigurePackage_WORKING_DIRECTORY}/${DOWNLOAD_FILENAME}" SHOW_PROGRESS)
+                    FindConfigurePackageDownloadFile("${FindConfigurePackage_ZIP_URL}" "${FindConfigurePackage_WORKING_DIRECTORY}/${DOWNLOAD_FILENAME}")
                 endif()
 
                 find_program(ZIP_EXECUTABLE wzzip PATHS "$ENV{ProgramFiles}/WinZip")
@@ -135,7 +148,7 @@ macro (FindConfigurePackage)
 
                 if(NOT EXISTS "${FindConfigurePackage_WORKING_DIRECTORY}/${DOWNLOAD_FILENAME}")
                     message(STATUS "start to download ${DOWNLOAD_FILENAME} from ${FindConfigurePackage_TAR_URL}")
-                    file(DOWNLOAD "${FindConfigurePackage_TAR_URL}" "${FindConfigurePackage_WORKING_DIRECTORY}/${DOWNLOAD_FILENAME}" SHOW_PROGRESS)
+                    FindConfigurePackageDownloadFile("${FindConfigurePackage_TAR_URL}" "${FindConfigurePackage_WORKING_DIRECTORY}/${DOWNLOAD_FILENAME}")
                 endif()
 
                 find_program(TAR_EXECUTABLE tar PATHS "${CYGWIN_INSTALL_PATH}/bin")
