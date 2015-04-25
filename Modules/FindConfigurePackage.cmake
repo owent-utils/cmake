@@ -60,7 +60,7 @@
 function(FindConfigurePackageDownloadFile from to)
     find_program (CURL_FULL_PATH curl)
     if(CURL_FULL_PATH)
-        execute_process(COMMAND ${CURL_FULL_PATH} -v ${from} -o ${to})
+        execute_process(COMMAND ${CURL_FULL_PATH} -L ${from} -o ${to})
     else()
         find_program (WGET_FULL_PATH wget)
         if(WGET_FULL_PATH)
