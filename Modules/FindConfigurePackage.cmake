@@ -119,7 +119,8 @@ macro (FindConfigurePackage)
                 if(NOT ZIP_EXECUTABLE AND NOT EXISTS "${FindConfigurePackage_WORKING_DIRECTORY}/${FindConfigurePackage_SRC_DIRECTORY_NAME}")
                   find_program(ZIP_EXECUTABLE 7z PATHS "$ENV{ProgramFiles}/7-Zip")
                   if(ZIP_EXECUTABLE)
-                      execute_process(COMMAND ${ZIP_EXECUTABLE} s -r -y "${FindConfigurePackage_WORKING_DIRECTORY}/${DOWNLOAD_FILENAME}"
+                      execute_process(COMMAND ${ZIP_EXECUTABLE}
+                            x -r -y ${DOWNLOAD_FILENAME}
                           WORKING_DIRECTORY "${FindConfigurePackage_WORKING_DIRECTORY}"
                       )
                   endif()
@@ -129,7 +130,7 @@ macro (FindConfigurePackage)
                   find_package(Cygwin)
                   find_program(ZIP_EXECUTABLE unzip PATHS "${CYGWIN_INSTALL_PATH}/bin")
                   if(ZIP_EXECUTABLE)
-                      execute_process(COMMAND ${ZIP_EXECUTABLE} -f "${FindConfigurePackage_WORKING_DIRECTORY}/${DOWNLOAD_FILENAME}"
+                      execute_process(COMMAND ${ZIP_EXECUTABLE} -o ${DOWNLOAD_FILENAME}
                           WORKING_DIRECTORY "${FindConfigurePackage_WORKING_DIRECTORY}"
                       )
                   endif()

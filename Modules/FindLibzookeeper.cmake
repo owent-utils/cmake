@@ -62,7 +62,7 @@ set(Libzookeeper_NAMES_MT zookeeper_mt libzookeeper_mt)
 set(Libzookeeper_NAMES_ST zookeeper_st libzookeeper_st)
 
 # Try each search configuration.
-find_path(Libzookeeper_INCLUDE_DIRS NAMES "zookeeper/zookeeper_version.h" ${_Libzookeeper_SEARCH_ROOT})
+find_path(Libzookeeper_INCLUDE_DIRS NAMES "zookeeper_version.h" ${_Libzookeeper_SEARCH_ROOT} PATH_SUFFIXES zookeeper)
 
 find_program(Libzookeeper_EXECUTABLE NAMES load_gen ${_Libzookeeper_SEARCH_ROOT})
 find_program(Libzookeeper_EXECUTABLE_CLI_ST NAMES cli_st ${_Libzookeeper_SEARCH_ROOT})

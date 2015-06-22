@@ -53,10 +53,10 @@ if(LUAJIT_ROOT)
   set(_LUAJIT_SEARCH_ROOT PATHS ${LUAJIT_ROOT} NO_DEFAULT_PATH)
 endif()
 
-set(LuaJit_NAMES luajit libluajit)
+set(LuaJit_NAMES luajit libluajit luajit-5.1 libluajit-5.1)
 
 # Try each search configuration.
-find_path(LuaJit_INCLUDE_DIR NAMES luajit.h        ${_LUAJIT_SEARCH_ROOT})
+find_path(LuaJit_INCLUDE_DIR NAMES luajit.h ${_LUAJIT_SEARCH_ROOT} PATH_SUFFIXES luajit-2.0)
 find_library(LuaJit_LIBRARY  NAMES ${LuaJit_NAMES} ${_LUAJIT_SEARCH_ROOT})
 
 mark_as_advanced(LuaJit_LIBRARY LuaJit_INCLUDE_DIR)

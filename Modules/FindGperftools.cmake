@@ -2,7 +2,7 @@
 # FindGperftools
 # --------
 #
-# Find the native libuv includes and library.
+# Find the native gperftools includes and library.
 #
 # IMPORTED Targets
 # ^^^^^^^^^^^^^^^^
