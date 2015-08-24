@@ -39,7 +39,7 @@ function(EchoWithColor)
 	endforeach()
 	
     if (ECHO_WITH_COLOR_COLOR AND PYTHONINTERP_FOUND AND ECHO_WITH_COLOR_TOOL_PATH)
-        execute_process(COMMAND ${PYTHON_EXECUTABLE} ${ECHO_WITH_COLOR_TOOL_PATH} -e -c ${ECHO_WITH_COLOR_COLOR} "{0}\r\n" ${ECHO_WITH_COLOR_MSG})
+        execute_process(COMMAND ${PYTHON_EXECUTABLE} ${ECHO_WITH_COLOR_TOOL_PATH} -e -c ${ECHO_WITH_COLOR_COLOR} "{0}\r\n" "${ECHO_WITH_COLOR_MSG}")
     else()
         message(${ECHO_WITH_COLOR_MSG})
     endif()
