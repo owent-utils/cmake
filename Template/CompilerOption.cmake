@@ -21,6 +21,10 @@ set(CXX_FLAGS_IN_ONE_COMMON "")
 if( "${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
     add_definitions(-Wall -Werror)
 
+    if(UNIX and NOT CYGWIN and not MINGW) {
+        add_definitions(-rdynamic)
+    }
+
     # gcc 4.9 编译输出颜色支持
     if ( CMAKE_CXX_COMPILER_VERSION VERSION_GREATER "4.9.0" OR CMAKE_CXX_COMPILER_VERSION  VERSION_EQUAL "4.9.0" )
             add_definitions(-fdiagnostics-color=auto)
