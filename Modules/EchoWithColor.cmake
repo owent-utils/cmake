@@ -1,4 +1,4 @@
-# cmake color echo function
+﻿# cmake color echo function
 # the final output color associated with terminal settings
 # using [print_color.py](https://github.com/owent-utils/python/blob/master/print_color.py) for cross platform color rending. 
 #   so [python](https://www.python.org/) and [print_color.py](https://github.com/owent-utils/python/blob/master/print_color.py) is required.
@@ -24,14 +24,14 @@ function(EchoWithColor)
 	# ${ARGV}, ${ARGN}
 	
 	set(ECHO_WITH_COLOR_COLOR "")
-	set(ECHO_WITH_COLOR_FLAG "false")
+	set(ECHO_WITH_COLOR_FLAG NO)
     set(ECHO_WITH_COLOR_MSG "")
 	
 	foreach (msg IN LISTS ARGV)
-        if ( "${msg}" STREQUAL "COLOR" )
-			set(ECHO_WITH_COLOR_FLAG "true")
-		elseif( "${ECHO_WITH_COLOR_FLAG}" STREQUAL "true" )
-			set(ECHO_WITH_COLOR_FLAG "false")
+        if ( ${msg} STREQUAL "COLOR" )
+			set(ECHO_WITH_COLOR_FLAG YES)
+		elseif(ECHO_WITH_COLOR_FLAG)
+			set(ECHO_WITH_COLOR_FLAG NO)
             set(ECHO_WITH_COLOR_COLOR ${msg})
 		else()
             set(ECHO_WITH_COLOR_MSG "${ECHO_WITH_COLOR_MSG}${msg}")
